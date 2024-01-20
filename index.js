@@ -1,69 +1,76 @@
+// Global variables
 let page = 1;
-let token = "fm7Cti7PfO--g-49PdF0rzLWWyzv7PhAlsquZ0iw06s"
+let token = "fm7Cti7PfO--g-49PdF0rzLWWyzv7PhAlsquZ0iw06s";
 
+// Reference to pagination section
 let paginationEl = document.getElementById("pagination");
 
-// both buttons.
+// Buttons for pagination
 let paginationBtns = paginationEl.getElementsByTagName("button");
-//console.log(paginationBtns);
 
+// Search button
 let searchBtn = document.getElementById("search-btn");
 
+// Event listeners for pagination buttons
 paginationBtns[0].addEventListener("click", goBack);
 paginationBtns[1].addEventListener("click", goForward);
 
+// Initial data retrieval and display
 getPlants();
 
+// Event listener for search button
 searchBtn.addEventListener("click", function () {
   let input = document.getElementById("search-input");
 
+  // For validate search input
   if (input.value === "") return;
-
   if (input.value.length < 4) return;
 
+  // For triggering search function
   searchPlants(input.value);
 });
 
-// DRY ---> Do not repeat yourself
+// Pagination function: This is for going back to the previous page
 function goBack() {
-  console.log("Back");
   if (page == 1) {
-    return; // to exit a function
+    return;
   }
   page = page - 1;
   updatePage();
   getPlants();
 }
 
+// Pagination function: This is for going forward to the next page
 function goForward() {
-  console.log("Go Forward");
   page = page + 1;
   updatePage();
   getPlants();
 }
 
-// Update the current page.
+// For updating the displayed page number in the pagination section
 function updatePage() {
   let span = paginationEl.getElementsByTagName("span")[0];
   span.innerText = page;
 }
 
+// For fetching plant data from the Trefle API based on the current page
 function getPlants() {
-    fetch(
-      "https://corsproxy.io/?" +
-        `https://trefle.io/api/v1/plants?token=${token}&page=${page}`,
-      {
-        method: "GET",
-        contentType: "application/json",
-      }
-    )
-      .then((response) => response.json())
-      .then(function (data) {
-        console.log(data);
-        displayPlants(data.data);
-      });
+  fetch(
+    "https://corsproxy.io/?" +
+      `https://trefle.io/api/v1/plants?token=${token}&page=${page}`,
+    {
+      method: "GET",
+      contentType: "application/json",
+    }
+  )
+    .then((response) => response.json())
+    .then(function (data) {
+      console.log(data);
+      displayPlants(data.data);
+    });
 }
 
+// For fetching plant data based on the search query
 function searchPlants(q) {
   if (q === "" || q === null || q === undefined) {
     return;
@@ -81,6 +88,7 @@ function searchPlants(q) {
     });
 }
 
+// For display plant information on the webpage
 function displayPlants(data) {
   let divEl = document.getElementById("all-plants");
 
@@ -91,17 +99,13 @@ function displayPlants(data) {
       plants +
       `
       <div class="a-plant">
-      <img
-        src="${plant.image_url}"
-      />
-      <div>
-        <p>Name:<span>${plant.common_name}</span></p>
-      </div>
-    </div> 
+        <img src="${plant.image_url}" />
+        <div>
+          <p>Name:<span>${plant.common_name}</span></p>
+        </div>
+      </div> 
       `;
   }
-
-  //console.log(plants);
 
   divEl.innerHTML = plants;
 }
