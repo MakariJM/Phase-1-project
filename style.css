@@ -1,0 +1,83 @@
+body {
+  position: relative;
+}
+
+#top-bar {
+  background-color: green;
+  color: white;
+  font-size: xx-large;
+  font-weight: 900;
+  padding: 10px;
+}
+
+#search-section {
+  margin-top: 10px;
+  padding: 10px;
+}
+#search-section input {
+  padding: 12px 12px;
+  margin: 8px;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+}
+
+#search-section span {
+  background-color: green;
+  padding: 5px 10px;
+  margin: 0px 5px;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+#search-section span:hover {
+  background-color: rgba(143, 251, 143, 0.5);
+}
+
+#all-plants {
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.a-plant {
+  border-radius: 10px;
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-top: 20px;
+}
+
+.a-plant img {
+  border-radius: 10px 10px 0px 0px;
+  height: 30em;
+  width: fit-content;
+  display: block;
+}
+
+.a-plant div {
+  background-color: green;
+  color: white;
+  padding: 10px;
+  border-radius: 0px 0px 10px 10px;
+}
+
+.a-plant span {
+  margin-left: 10px;
+  font-size: large;
+  font-weight: bold;
+}
+
+#pagination {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+#pagination span {
+  font-size: large;
+  font-weight: bold;
+  color: green;
+  margin-left: 15px;
+  margin-right: 15px;
+}
